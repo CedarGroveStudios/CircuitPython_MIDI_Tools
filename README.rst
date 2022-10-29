@@ -124,7 +124,7 @@ Ref: https://www.midi.org/specifications-old/item/table-3-control-change-message
 
 Documentation
 =============
-API documentation for this library can be found `here <https://circuitpython-midi-tools.readthedocs.io/>`_.
+API documentation for this library can be found `here <https://github.com/CedarGroveStudios/CircuitPython_MIDI_Tools/blob/main/media/pseudo_rtd_cedargrove_midi_tools.pdf>`_.
 
 For information on building library documentation, please check out
 `this guide <https://learn.adafruit.com/creating-and-sharing-a-circuitpython-library/sharing-our-docs-on-readthedocs#sphinx-5-1>`_.
