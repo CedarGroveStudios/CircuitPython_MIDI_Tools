@@ -60,6 +60,7 @@ Usage Example
 =============
 
 ``note_or_name(note)``
+
 Bidirectionally translates a MIDI sequential note value to a note name or a note
 name to a MIDI sequential note value. Note values are of integer type in the
 range of 0 to 127 (inclusive). Note names are character strings expressed
@@ -75,6 +76,7 @@ of the note value or name range, the value of ``None`` is returned.
     'G5'
 
 ``note_to_name(note)`` and ``name_to_note(name)``
+
 Translates a MIDI sequential note value to a note name or note name to a note
 value. Note values are of integer type in the range of 0 to 127 (inclusive).
 Note names are strings expressed in the NoteOctave format, such as 'C4' or
@@ -89,13 +91,13 @@ If the input value is outside the range, the value of ``None`` is returned.
     >>> name_to_note('A#4')
     70
 
-
 ``note_to_frequency(note)`` and ``frequency_to_note(frequency)``
+
 Translates a MIDI sequential note value to its corresponding frequency in
 Hertz (Hz) or a frequency to its nearest note value. Note values are of integer
 type in the range of 0 to 127 (inclusive). Frequency values are floating point.
 If the input is outside of the range, the value ``None`` is returned.
-Ref: MIDI Tuning Standard formula: https://en.wikipedia.org/wiki/ MIDI_tuning_standard
+Ref: MIDI Tuning Standard formula: https://en.wikipedia.org/wiki/MIDI_tuning_standard
 
 .. code_block:: python
 
@@ -106,6 +108,7 @@ Ref: MIDI Tuning Standard formula: https://en.wikipedia.org/wiki/ MIDI_tuning_st
     60
 
 ``cc_code_to_description(cc_code)``
+
 Provides a controller description decoded from a Control Change controller code
 value.
 Ref: https://www.midi.org/specifications-old/item/table-3-control-change-messages-data-bytes-2
