@@ -29,7 +29,7 @@ __repo__ = "https://github.com/CedarGroveStudios/CircuitPython_MIDI_Tools.git"
 NOTE_BASE = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
 
-def note_or_name(input):
+def note_or_name(value):
     """Bidirectionally translates a MIDI sequential note value to a note name
     or a note name to a MIDI sequential note value. Note values are
     of integer type in the range of 0 to 127 (inclusive). Note names are
@@ -38,17 +38,16 @@ def note_or_name(input):
     'F#9' (note value 127). If the input value is outside of the note
     value or name range, the value of None is returned.
 
-    :param union(int, str) input: The note name or note value input. Note value
+    :param union(int, str) value: The note name or note value input. Note value
     is an integer; note name is a string. No default value.
     """
-    if type(input) == str:
+    if isinstance(value, str):
         # Input is a string, so it's a note name
-        return name_to_note(input)
-    elif type(input) == int:
+        return name_to_note(value)
+    if isinstance(value, int):
         # Input is an integer, so it's a note value
-        return note_to_name(input)
-    else:
-        return None  # Invalid input parameter type
+        return note_to_name(value)
+    return None  # Invalid input parameter type
 
 
 def note_to_name(note):
@@ -60,23 +59,22 @@ def note_to_name(note):
     the value of None is returned.
 
     :param int note: The note value input in the range of 0 to 127 (inclusive).
-    No default.
+    No default value.
     """
     if 0 <= note <= 127:
         return NOTE_BASE[note % 12] + str((note // 12) - 1)
-    else:
-        return None  # Note value outside valid range
+    return None  # Note value outside valid range
 
 
 def name_to_note(name):
     """Translates a note name to a MIDI sequential note value. Note names are
-    character strings expressed in the format NoteOctave, such as
+    character strings expressed in the NoteOctave format, such as
     'C4' or 'G#7'. Note names can range from 'C-1' (note value 0) to
     'F#9' (note value 127). Note values are of integer type in the range
     of 0 to 127 (inclusive). If the input value is outside of that range,
     the value of None is returned.
 
-    :param str name: The note name input in NoteOctave format. No default.
+    :param str name: The note name input in NoteOctave format. No default value.
     """
     name = name.upper()  # Convert lower to uppercase
     if (name[:1] or name[:2]) in NOTE_BASE:
@@ -90,8 +88,7 @@ def name_to_note(name):
             note = NOTE_BASE.index(name[0])
             octave = int(name[1:])
         return note + (12 * (octave + 1))  # Calculated note value
-    else:
-        return None  # Input string is not in NOTE_BASE
+    return None  # Input string is not in NOTE_BASE
 
 
 def note_to_frequency(note):
@@ -100,18 +97,17 @@ def note_to_frequency(note):
     127 (inclusive). Frequency values are floating point. If the input
     note value is less than 0 or greater than 127, the input is
     invalid and the value of None is returned. Ref: MIDI Tuning Standard
-    formula.
+    formula: https://en.wikipedia.org/wiki/MIDI_tuning_standard
 
-    :param int note: The note value input in the range of 0 to 127 (inclusive).
-    No default.
+    :param int note: The MIDI note value input in the range of 0 to 127
+    (inclusive). No default.
     """
     if 0 <= note <= 127:
         return pow(2, (note - 69) / 12) * 440
-    else:
-        return None  # note value outside valid range
+    return None  # note value outside valid range
 
 
-def frequency_to_note(freq):
+def frequency_to_note(frequency):
     """Translates a frequency in Hertz (Hz) to the closest MIDI sequential
     note value. Frequency values are floating point. Note values are of
     integer type in the range of 0 to 127 (inclusive). If the input
@@ -120,12 +116,11 @@ def frequency_to_note(freq):
     is returned. Ref: MIDI Tuning Standard formula:
     https://en.wikipedia.org/wiki/MIDI_tuning_standard
 
-    :param float freq: The frequency value input. No default.
+    :param float frequency: The frequency value input in Hz. No default.
     """
-    if (pow(2, (0 - 69) / 12) * 440) <= freq <= (pow(2, (127 - 69) / 12) * 440):
-        return int(69 + (12 * log(freq / 440, 2)))
-    else:
-        return None  # Frequency outside valid range
+    if (pow(2, (0 - 69) / 12) * 440) <= frequency <= (pow(2, (127 - 69) / 12) * 440):
+        return int(69 + (12 * log(frequency / 440, 2)))
+    return None  # Frequency outside valid range
 
 
 # Controller descriptions -- no list offset
@@ -265,5 +260,8 @@ CONTROLLERS = [
 def cc_code_to_description(cc_code):
     """Provides a controller description decoded from a Control Change code value.
     https://www.midi.org/specifications-old/item/table-3-control-change-messages-data-bytes-2
+
+    :param int cc_code: The Control Change code value in the range of 0 to 127.
+    No default value.
     """
     return CONTROLLERS[cc_code]
