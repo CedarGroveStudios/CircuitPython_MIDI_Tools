@@ -68,7 +68,7 @@ in the NoteOctave format, such as 'C4' or 'G#7'. Note names can range from
 'C-1' (note value 0) to 'F#9' (note value 127). If the input value is outside
 of the note value or name range, the value of ``None`` is returned.
 
-.. code_block:: python
+.. code-block:: python
 
     >>> from cedargrove_midi_tools import note_or_name
     >>> note_or_name('G5')
@@ -84,7 +84,7 @@ Note names are strings expressed in the NoteOctave format, such as 'C4' or
 'G#7'. Note names can range from 'C-1' (note value 0) to 'F#9' (note value 127).
 If the input value is outside the range, the value of ``None`` is returned.
 
-.. code_block:: python
+.. code-block:: python
 
     >>> from cedargrove_midi_tools import note_to_name, name_to_note
     >>> note_to_name(70)
@@ -100,7 +100,7 @@ type in the range of 0 to 127 (inclusive). Frequency values are floating point.
 If the input is outside of the range, the value ``None`` is returned.
 Ref: MIDI Tuning Standard formula: https://en.wikipedia.org/wiki/MIDI_tuning_standard
 
-.. code_block:: python
+.. code-block:: python
 
     >>> from cedargrove_midi_tools import note_to_frequency, frequency_to_note
     >>> note_to_frequency(60)
@@ -114,7 +114,7 @@ Provides a controller description decoded from a Control Change controller code
 value.
 Ref: https://www.midi.org/specifications-old/item/table-3-control-change-messages-data-bytes-2
 
-.. code_block:: python
+.. code-block:: python
 
     >>> from cedargrove_midi_tools import cc_code_to_description
     >>> cc_code_to_description(24)
