@@ -70,7 +70,8 @@ of the note value or name range, the value of ``None`` is returned.
 
 .. code_block:: python
 
-    >>> from cedargrove_midi_tools import note_or_name >>> note_or_name('G5')
+    >>> from cedargrove_midi_tools import note_or_name
+    >>> note_or_name('G5')
     79
     >>> note_or_name(79)
     'G5'
