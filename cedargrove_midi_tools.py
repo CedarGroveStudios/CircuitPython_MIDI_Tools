@@ -136,7 +136,7 @@ def frequency_to_note_cents(frequency):
     if (pow(2, (0 - 69) / 12) * 440) <= frequency <= (pow(2, (128 - 69) / 12) * 440):
         note = int(69 + (12 * log(frequency / 440, 2)))
         note_freq = pow(2, (note - 69) / 12) * 440
-        return note, int(1200 * log(frequency / note_freq))
+        return note, int(1200 * log(frequency / note_freq, 2))
     return None, None  # Frequency outside valid range
 
 
