@@ -119,9 +119,10 @@ are integers in the range of 0 to 127 (inclusive). Cent values range from
 frequency for note 0 or greater than note 127, the note value cannot be
 determined and ``None`` is returned. Ref: MIDI Tuning Standard and cent
 formulae:
-    https://en.wikipedia.org/wiki/MIDI_tuning_standard
 
-    https://en.wikipedia.org/wiki/Cent_(music)
+https://en.wikipedia.org/wiki/MIDI_tuning_standard
+
+https://en.wikipedia.org/wiki/Cent_(music)
 
 ``cc_code_to_description(cc_code)``
 
