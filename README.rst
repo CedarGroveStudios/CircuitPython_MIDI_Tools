@@ -18,7 +18,9 @@ Introduction
     :target: https://github.com/psf/black
     :alt: Code Style: Black
 
-A collection of helpers for processing MIDI notes and Control Change codes.
+A CircuitPython method collection for processing MIDI notes and Control Change codes. It currently consists of seven
+helpers for converting MIDI note values to and from frequency values and note name representations, and to provide
+descriptions of MIDI Control Change (CC) controller codes.
 
 
 Dependencies
@@ -61,12 +63,12 @@ Usage Example
 
 ``note_or_name(note)``
 
-Bidirectionally translates a MIDI sequential note value to a note name or a note
-name to a MIDI sequential note value. Note values are of integer type in the
-range of 0 to 127 (inclusive). Note names are character strings expressed
-in the NoteOctave format, such as 'C4' or 'G#7'. Note names can range from
-'C-1' (note value 0) to 'F#9' (note value 127). If the input value is outside
-of the note value or name range, the value of ``None`` is returned.
+Bidirectionally translates a MIDI sequential note value to a note name
+or a note name to a MIDI sequential note value. Note values are integers in
+the range of 0 to 127 (inclusive). Note names are character strings
+expressed in the format NoteOctave such as 'C4' or 'G#7'. Note names range
+from 'C-1' (note value 0) to 'F#9' (note value 127). If the input value is
+outside the note value or name range, the value of ``None`` is returned.
 
 .. code-block:: python
 
@@ -79,7 +81,7 @@ of the note value or name range, the value of ``None`` is returned.
 ``note_to_name(note)`` and ``name_to_note(name)``
 
 Translates a MIDI sequential note value to a note name or note name to a note
-value. Note values are of integer type in the range of 0 to 127 (inclusive).
+value. Note values are integers in the range of 0 to 127 (inclusive).
 Note names are strings expressed in the NoteOctave format, such as 'C4' or
 'G#7'. Note names can range from 'C-1' (note value 0) to 'F#9' (note value 127).
 If the input value is outside the range, the value of ``None`` is returned.
@@ -95,8 +97,8 @@ If the input value is outside the range, the value of ``None`` is returned.
 ``note_to_frequency(note)`` and ``frequency_to_note(frequency)``
 
 Translates a MIDI sequential note value to its corresponding frequency in
-Hertz (Hz) or a frequency to its nearest note value. Note values are of integer
-type in the range of 0 to 127 (inclusive). Frequency values are floating point.
+Hertz (Hz) or a frequency to a MIDI note value. Note values integers
+in the range of 0 to 127 (inclusive). Frequency values are floating point.
 If the input is outside of the range, the value ``None`` is returned.
 Ref: MIDI Tuning Standard formula: https://en.wikipedia.org/wiki/MIDI_tuning_standard
 
@@ -107,6 +109,18 @@ Ref: MIDI Tuning Standard formula: https://en.wikipedia.org/wiki/MIDI_tuning_sta
     261.625
     >>> frequency_to_note(261.63)
     60
+
+``frequency_to_note_cents(frequency)``
+
+Translates a frequency in Hertz (Hz) to a MIDI sequential note value and
+positive offset in cents. Frequency values are floating point. Note values
+are integers in the range of 0 to 127 (inclusive). Cent values range from
+0 to +100 cents. If the input frequency is less than the corresponding
+frequency for note 0 or greater than note 127, the note value cannot be
+determined and ``None`` is returned. Ref: MIDI Tuning Standard and cent
+formulae:
+https://en.wikipedia.org/wiki/MIDI_tuning_standard
+https://en.wikipedia.org/wiki/Cent_(music)
 
 ``cc_code_to_description(cc_code)``
 
