@@ -74,16 +74,10 @@ def name_to_note(name):
     :param str name: The note name input in NoteOctave format. No default value.
     """
     name = name.upper()  # Convert lower to uppercase
-    if (name[:1] or name[:2]) in NOTE_BASE:
+    if name[:-1] in NOTE_BASE:
         # Note name is valid
-        if "#" in name:
-            # Extract octave value for 'sharped' note
-            note = NOTE_BASE.index(name[:2])
-            octave = int(name[2:])
-        else:
-            # Extract octave value
-            note = NOTE_BASE.index(name[0])
-            octave = int(name[1:])
+        note = NOTE_BASE.index(name[:-1])
+        octave = int(name[-1])
         return note + (12 * (octave + 1))  # Calculated note value
     return None  # Input string is not in NOTE_BASE
 
