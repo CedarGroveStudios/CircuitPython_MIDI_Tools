@@ -83,7 +83,7 @@ outside the note value or name range, the value of ``None`` is returned.
 Translates a MIDI sequential note value to a note name or note name to a note
 value. Note values are integers in the range of 0 to 127 (inclusive).
 Note names are strings expressed in the NoteOctave format, such as 'C4' or
-'G#7'. Note names can range from 'C-1' (note value 0) to 'F#9' (note value 127).
+'G#7'. Note names can range from 'C-1' (note value 0) to 'G9' (note value 127).
 If the input value is outside the range, the value of ``None`` is returned.
 
 .. code-block:: python
