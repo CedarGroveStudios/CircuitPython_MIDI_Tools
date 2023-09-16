@@ -66,19 +66,26 @@ def note_to_name(note):
 
 def name_to_note(name):
     """Translates a note name to a MIDI sequential note value. Note names are
-    character strings expressed in the NoteOctave format such as 'C4' or 'G#7'.
-    Note names range from 'C-1' (note value 0) to 'F#9' (note value 127). Note
-    values are of integer type in the range of 0 to 127 (inclusive). If the
-    input value is outside that range, the value of `None` is returned.
+    character strings expressed in Scienfic Pitch Notation (NoteOctave) format
+    such as 'C4' or 'G#7'. Note names range from 'C-1' (note value 0) to
+    'F#9' (note value 127). Note values are of integer type in the range of
+    0 to 127 (inclusive). If the input value is outside that range, the value
+    of `None` is returned.
 
-    :param str name: The note name input in NoteOctave format. No default value.
+    :param str name: The note name input in SPN format. No default value.
     """
     name = name.upper()  # Convert lower to uppercase
     if name[:-1] in NOTE_BASE:
         # Note name is valid
         note = NOTE_BASE.index(name[:-1])
-        octave = int(name[-1])
-        return note + (12 * (octave + 1))  # Calculated note value
+        if "-1" in name:
+            # Special case for octave -1
+            note = NOTE_BASE.index(name[:-2])
+            octave = -1
+        else:
+            note = NOTE_BASE.index(name[:-1])
+            octave = int(name[-1])
+        return min(max(0, note + (12 * (octave + 1))), 127)  # MIDI note value
     return None  # Input string is not in NOTE_BASE
 
 
